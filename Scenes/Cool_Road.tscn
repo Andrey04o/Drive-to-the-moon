@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Textures/Dev/Green/texture_04.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Dev/Orange/texture_05.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 1 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
+
+[node name="Cool_Road" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 269.874, 0, 0, 0, 0.198, 0, 0, 0, 176.814, 0, 0, 0 )
+use_collision = true
+material = SubResource( 1 )
+
+[node name="Road1" type="Spatial" parent="."]
+
+[node name="CSGBox2" type="CSGBox" parent="Road1"]
+transform = Transform( 5, 0, 0, 2.101, 1, 0, 0, 0, 1, 5.5315, 3.12634, 0 )
+use_collision = true
+width = 4.0
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="CSGBox3" type="CSGBox" parent="Road1"]
+transform = Transform( -5, 0, -8.74228e-08, 2.101, 1, 0, 4.37114e-07, 0, -1, 36.4909, 3.08618, 0 )
+use_collision = true
+width = 4.0
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="CSGBox4" type="CSGBox" parent="Road1"]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20.991, 7.3, 0 )
+use_collision = true
+width = 11.2
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="Road3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 79 )
+
+[node name="CSGBox2" type="CSGBox" parent="Road3"]
+transform = Transform( 1.06109, 1.78585, 0, 0.167068, 0.562942, 0, 0, 0, 1, 6.08984, 1.39563, 0 )
+use_collision = true
+width = 22.0
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="Road4" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 54 )
+
+[node name="CSGBox2" type="CSGBox" parent="Road4"]
+transform = Transform( 5, 0, 0, 2.101, 1, 0, 0, 0, 1, 5.5315, 3.12634, 0 )
+use_collision = true
+width = 4.0
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="Road2" type="Spatial" parent="."]
+transform = Transform( 1.7, 0, 0, 0, 2.2, 0, 0, 0, 1, 0, 0, 28 )
+
+[node name="CSGBox2" type="CSGBox" parent="Road2"]
+transform = Transform( 5, 0, 0, 2.101, 1, 0, 0, 0, 1, 5.5315, 3.12634, 0 )
+use_collision = true
+width = 4.0
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="CSGBox3" type="CSGBox" parent="Road2"]
+transform = Transform( -5, 0, -8.74228e-08, 2.101, 1, 0, 4.37114e-07, 0, -1, 36.4909, 3.08618, 0 )
+use_collision = true
+width = 4.0
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="CSGBox4" type="CSGBox" parent="Road2"]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20.991, 7.3, 0 )
+use_collision = true
+width = 11.2
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 12, 0 )
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_normal_bias = 0.433
+directional_shadow_max_distance = 139.2
