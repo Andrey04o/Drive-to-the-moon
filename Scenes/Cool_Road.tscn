@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Textures/Dev/Green/texture_04.png" type="Texture" id=1]
 [ext_resource path="res://Textures/Dev/Orange/texture_05.png" type="Texture" id=2]
+[ext_resource path="res://Textures/Dev/Purple/texture_03.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Player_Car_Mov.cs" type="Script" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_world_triplanar = true
@@ -13,6 +15,23 @@ flags_world_triplanar = true
 albedo_texture = ExtResource( 2 )
 uv1_triplanar = true
 
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="ConvexPolygonShape" id=4]
+points = PoolVector3Array( 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1 )
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 3 )
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id=6]
+material = SubResource( 5 )
+top_radius = 0.5
+bottom_radius = 0.5
+height = 0.2
+radial_segments = 6
+
 [node name="Cool_Road" type="Spatial"]
 
 [node name="CSGBox" type="CSGBox" parent="."]
@@ -20,10 +39,15 @@ transform = Transform( 269.874, 0, 0, 0, 0.198, 0, 0, 0, 176.814, 0, 0, 0 )
 use_collision = true
 material = SubResource( 1 )
 
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 5, 0, 0, 0, 1.73205, 1, 0, -1, 1.73205, -26, -1, 11 )
+use_collision = true
+material = SubResource( 1 )
+
 [node name="Road1" type="Spatial" parent="."]
 
 [node name="CSGBox2" type="CSGBox" parent="Road1"]
-transform = Transform( 5, 0, 0, 2.101, 1, 0, 0, 0, 1, 5.5315, 3.12634, 0 )
+transform = Transform( 4.9636, -0.402989, 0, 2.1856, 0.915205, 0, 0, 0, 1, 5.5315, 3.12634, 0 )
 use_collision = true
 width = 4.0
 depth = 8.0
@@ -93,3 +117,60 @@ shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_normal_bias = 0.433
 directional_shadow_max_distance = 139.2
+
+[node name="Player-Car" type="VehicleBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 2, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Player-Car"]
+transform = Transform( 1, 0, 0, 0, 0.265562, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player-Car"]
+transform = Transform( 1, 0, 0, 0, 0.265562, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Wheel-f-l" type="VehicleWheel" parent="Player-Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1 )
+use_as_steering = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Player-Car/Wheel-f-l"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+
+[node name="Wheel-f-r" type="VehicleWheel" parent="Player-Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1 )
+use_as_steering = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Player-Car/Wheel-f-r"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+
+[node name="Wheel-b-l" type="VehicleWheel" parent="Player-Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1 )
+use_as_traction = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Player-Car/Wheel-b-l"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+
+[node name="Wheel-b-r" type="VehicleWheel" parent="Player-Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+use_as_traction = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Player-Car/Wheel-b-r"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+
+[node name="Camera" type="Camera" parent="Player-Car"]
+transform = Transform( -1, 0, -8.74228e-08, -2.26267e-08, 0.965926, 0.258819, 8.44439e-08, 0.258819, -0.965926, 0, 2, -4 )
+
+[node name="Player_Car_Mov" type="Node" parent="Player-Car"]
+script = ExtResource( 4 )
+EngineForce_multiplyer = 1000.0
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 4.98144, -0.395436, 0, 2.14464, 0.918494, 0, 0, 0, 1, -13.4685, 3.12634, -14 )
+use_collision = true
+width = 4.0
+depth = 8.0
+material = SubResource( 2 )
