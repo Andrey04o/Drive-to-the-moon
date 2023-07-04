@@ -21,6 +21,7 @@ public class Player_Car_Mov_v2 : Node
     Spatial DirMove;
     Vector3 lookForward;
     Vector3 inclineForward;
+    MeshInstance Player_model;
     //public bool rigidbody_mode = false;
     public override void _Ready()
     {
@@ -29,6 +30,7 @@ public class Player_Car_Mov_v2 : Node
         rDown = GetParent().GetNode<RayCast>("RayCastDown");
         cPlayer = GetParent().GetNode<Camera>("Camera");
         DirMove = GetParent().GetNode<Spatial>("DirMove");
+        Player_model = GetParent().GetNode<MeshInstance>("MeshInstance");
     }
 
     public override void _Process(float delta)
@@ -48,8 +50,10 @@ public class Player_Car_Mov_v2 : Node
         GD.Print(rDown.IsColliding());
         CheckIsFall();
         if (Player_car.CustomIntegrator == true) {
+            SnuggleFloor();
             Rotate(delta);
             Drive(delta);
+            
         }
     }
 
@@ -147,4 +151,10 @@ public class Player_Car_Mov_v2 : Node
         //Player_car.EngineForce = forward * EngineForce_multiplyer;
     }
 
+    void SnuggleFloor() {
+        Vector3 pD = rDown.GetCollisionPoint();
+        float fV = Player_model.Translation.y - Player_model.Scale.y;
+        pD.y = pD.y - fV;
+        Player_car.Translation = pD;
+    }
 }
