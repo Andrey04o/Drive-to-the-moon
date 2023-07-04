@@ -93,18 +93,27 @@ public class Player_Car_Mov_v2 : Node
         Transform tr;
         //Basis basis = new Basis(normal, 0f);
         normal = rDown.GetCollisionNormal();
-        GD.Print(inclineForward);
+        //GD.Print(inclineForward);
         inclineForward = normal.Cross(lookForward).Cross(normal);
-        GD.Print(normal.SignedAngleTo(Player_car.Transform.basis.y, Vector3.Left));
+        //GD.Print(normal.SignedAngleTo(Player_car.Transform.basis.y, Vector3.Left));
         //normal.SignedAngleTo(Vector3.Up, Vector3.Up);
         //Player_car.Transform.basis.Quat().
-        Player_car.RotateObjectLocal(normal, left * speedRotation * delta);
+        Player_car.RotateObjectLocal(Player_car.Transform.basis.y, left * speedRotation * delta);
         tr = Player_car.Transform;
-        GD.Print(tr.basis.Quat());
+        
+        GD.Print(tr.basis.y);
+        GD.Print(normal);
+        GD.Print(tr.basis.y.Cross(normal));
+        GD.Print(normal.Cross(tr.basis.y));
+        tr.basis.y = normal;
+        GD.Print(tr.basis.y += tr.basis.y.Cross(normal));
+        Player_car.Transform = tr;
+        Player_car.Transform = Player_car.Transform.Orthonormalized();
+        //GD.Print(tr.basis.Quat());
         //normal.
         //tr.basis = tr.basis.Rotated(-tr.basis.x, normal.AngleTo(tr.basis.y));
         
-        GD.Print(normal.AngleTo(tr.basis.y));
+        //GD.Print(normal.AngleTo(tr.basis.y));
         //normal.SignedAngleTo(rDown.CastTo,Vector3.Up);
         //Player_car.GlobalRotation = rDown.
         //Player_car.Rotate(Vector3.Left, normal.SignedAngleTo(Player_car.Transform.basis.y, Vector3.Up));
@@ -112,7 +121,7 @@ public class Player_Car_Mov_v2 : Node
         
         //Player_car.Rotation
         //tr.basis.y = normal;
-        Player_car.Transform = tr;
+        //Player_car.Transform = tr;
         //tr = Player_car.Transform;
         //tr.basis = new Basis(normal, 0f);
         //Player_car.Transform = tr;
