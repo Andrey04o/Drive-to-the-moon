@@ -152,7 +152,7 @@ depth = 8.0
 material = SubResource( 2 )
 
 [node name="RigidBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 4.3, -2.1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
 transform = Transform( 0.9, 0, 0, 0, 0.55768, 0, 0, 0, 1, 0, 1.1, 0 )
@@ -164,6 +164,7 @@ shape = SubResource( 4 )
 
 [node name="Camera" type="Camera" parent="RigidBody"]
 transform = Transform( -1, -3.19744e-14, -8.74228e-08, -2.26267e-08, 0.965926, 0.258819, 8.44439e-08, 0.258819, -0.965926, 0, 2.50884, -3.96718 )
+far = 553.6
 
 [node name="Player_Car_Mov_v2" type="Node" parent="RigidBody"]
 script = ExtResource( 3 )
@@ -171,6 +172,8 @@ script = ExtResource( 3 )
 [node name="RayCastDown" type="RayCast" parent="RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 enabled = true
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_thickness = 5
 
 [node name="DirMove" type="Spatial" parent="RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4 )

@@ -104,15 +104,16 @@ public class Player_Car_Mov_v2 : Node
         //Player_car.Transform.basis.Quat().
         Player_car.RotateObjectLocal(Player_car.Transform.basis.y, left * speedRotation * delta);
         tr = Player_car.Transform;
-        
-        GD.Print(tr.basis.y);
-        GD.Print(normal);
-        GD.Print(tr.basis.y.Cross(normal));
-        GD.Print(normal.Cross(tr.basis.y));
+        //rDown.
+        //GD.Print(tr.basis.y);
+        //GD.Print(normal);
+        //GD.Print(tr.basis.y.Cross(normal));
+        //GD.Print(normal.Cross(tr.basis.y));
         tr.basis.y = normal;
-        GD.Print(tr.basis.y += tr.basis.y.Cross(normal));
+        //GD.Print(tr.basis.y += tr.basis.y.Cross(normal));
         Player_car.Transform = tr;
         Player_car.Transform = Player_car.Transform.Orthonormalized();
+        //Player_car.T
         //GD.Print(tr.basis.Quat());
         //normal.
         //tr.basis = tr.basis.Rotated(-tr.basis.x, normal.AngleTo(tr.basis.y));
@@ -155,6 +156,9 @@ public class Player_Car_Mov_v2 : Node
         Vector3 pD = rDown.GetCollisionPoint();
         float fV = Player_model.Translation.y - Player_model.Scale.y;
         pD.y = pD.y - fV;
-        Player_car.Translation = pD;
+        Vector3 tr = Player_car.Translation;
+        tr.y = pD.y;
+        Player_car.Translation = tr;
+        GD.Print(pD.y);
     }
 }
